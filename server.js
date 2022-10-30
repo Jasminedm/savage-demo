@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient
 
 var db, collection;
 
-const url = "mongodb+srv://demo:demo@cluster0-q2ojb.mongodb.net/test?retryWrites=true";
+const url = "mongodb+srv://jasminedm:jdmmongodb@cluster0.0xxrpxp.mongodb.net/?retryWrites=true&w=majority";
 const dbName = "demo";
 
 app.listen(3000, () => {
@@ -52,6 +52,8 @@ app.put('/messages', (req, res) => {
     res.send(result)
   })
 })
+
+
 
 app.delete('/messages', (req, res) => {
   db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
