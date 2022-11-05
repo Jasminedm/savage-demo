@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>21 Savage Fans</title>
+  <title>Live Chat Room</title>
   <link rel="shortcut icon" href="favicon.ico">
   <link rel="stylesheet" href="font-awesome.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>21 Savage</h1>
-  <h2>Why you trappin so hard?</h2>
+  <section class="container">
+  <h1>Where have you been?</h1>
+  <h2>Add the destinations to your blex, rate them based on your exprience!</h2>
 
 
-  <h3>Messages</h3>
+  <h3>My Blex</h3>
   <ul class="messages">
   <% for(var i=0; i<messages.length; i++) {%>
-    <li class="message">
-      <span><%= messages[i].name %></span>
-      <span><%= messages[i].msg %></span>
-      <span><%= messages[i].thumbUp %></span>
+    <li class="message" data-objectId="<%= messages[i]._id %>">
+      <span class="nam"><%= messages[i].name.toUpperCase() %></span>
+      <span class="msg"><%= messages[i].msg %></span>
+      <span class="lik"><%= messages[i].thumbUp %></span>
+      
       <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
       <span><i class="fa fa-thumbs-down" aria-hidden="true"></i></span>
       <span><i class="fa fa-trash" aria-hidden="true"></i></span>
@@ -26,14 +28,15 @@
   <% } %>
   </ul>
 
-  <h2>Add a message</h2>
+  <h2>I've just returned from</h2>
 
   <form action="/messages" method="POST">
-    <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="message" name="msg">
-    <button type="submit">Submit</button>
+    <input type="text">
+    <input type="text" placeholder="Destination" name="name">
+    <input type="text" placeholder="Additional Thoughts" name="msg">
+    <button type="submit">Add</button>
   </form>
-
+</section>
   <script src="main.js"></script>
 
 </body>

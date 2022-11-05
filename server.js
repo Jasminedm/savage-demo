@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
+const ObjectId = require('mongodb').ObjectID
 
 var db, collection;
 
@@ -40,7 +41,7 @@ app.post('/messages', (req, res) => {
 
 app.put('/messages', (req, res) => {
   db.collection('messages')
-  .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+  .findOneAndUpdate({_id: ObjectId(req.body.id)}, {
     $set: {
       thumbUp:req.body.thumbUp + 1
     }
@@ -56,7 +57,9 @@ app.put('/messages', (req, res) => {
 
 
 app.delete('/messages', (req, res) => {
-  db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+  db.collection('messages').findOneAndDelete(
+    {_id: ObjectId(req.body.id)}, 
+    (err, result) => {
     if (err) return res.send(500, err)
     res.send('Message deleted!')
   })

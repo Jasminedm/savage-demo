@@ -7,13 +7,16 @@ Array.from(thumbUp).forEach(function(element) {
         const name = this.parentNode.parentNode.childNodes[1].innerText
         const msg = this.parentNode.parentNode.childNodes[3].innerText
         const thumbUp = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
+        const id = this.parentNode.parentNode.getAttribute('data-objectId')
         fetch('messages', {
           method: 'put',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify({
             'name': name,
             'msg': msg,
-            'thumbUp':thumbUp
+            'thumbUp':thumbUp,
+            'id': id
+            
           })
         })
         .then(response => {
@@ -31,13 +34,15 @@ Array.from(thumbDown).forEach(function(element) {
     const name = this.parentNode.parentNode.childNodes[1].innerText
     const msg = this.parentNode.parentNode.childNodes[3].innerText
     const thumbUp = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
+    const id = this.parentNode.parentNode.getAttribute('data-objectId')
     fetch('messages', {
       method: 'put',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         'name': name,
         'msg': msg,
-        'thumbUp':thumbUp -2
+        'thumbUp':thumbUp -2,
+        'id': id
       })
     })
     .then(response => {
@@ -54,6 +59,7 @@ Array.from(trash).forEach(function(element) {
       element.addEventListener('click', function(){
         const name = this.parentNode.parentNode.childNodes[1].innerText
         const msg = this.parentNode.parentNode.childNodes[3].innerText
+        const id = this.parentNode.parentNode.getAttribute('data-objectId')
         fetch('messages', {
           method: 'delete',
           headers: {
@@ -61,7 +67,8 @@ Array.from(trash).forEach(function(element) {
           },
           body: JSON.stringify({
             'name': name,
-            'msg': msg
+            'msg': msg,
+            'id': id
           })
         }).then(function (response) {
           window.location.reload()
